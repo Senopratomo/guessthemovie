@@ -1,9 +1,9 @@
 package org.senolab.guessthemovie;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class App {
     private static Game guessTheMovie;
@@ -17,13 +17,19 @@ public class App {
         System.out.println("Let's get started!!! Enjoy!\n\n");
         System.out.println("================================================================================================\n");
         //Read list of movies from File and store it array
-        File file = new File("C:\\project\\udacity\\resources\\movies.txt");
-        ArrayList<String> listOfMovies = new ArrayList<String>();
         try {
+            ClassLoader cl = App.class.getClassLoader();
+            String fileName = "movies.txt";
+            InputStream in = cl.getResourceAsStream(fileName);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            ArrayList<String> listOfMovies = (ArrayList<String>) br.lines().collect(Collectors.toList());
+            br.close();
+            /**
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()) {
                 listOfMovies.add(scanner.nextLine());
             }
+             **/
             //Setup Game class instance and scanner for user input
             guessTheMovie = new Game(listOfMovies);
             Scanner userInput = new Scanner(System.in);
@@ -43,6 +49,9 @@ public class App {
         } catch (FileNotFoundException e) {
             System.out.println("The file you specified doesn't exist!");
             e.printStackTrace();
+        } catch (IOException ioe) {
+            System.out.println("Something wrong when reading the resource movie file!");
+            ioe.printStackTrace();
         }
     }
 

@@ -7,6 +7,14 @@
    The program will randomly pick a movie title from a text file that contains a large list of movies.
 </p>
 
+<h3>To modify the list of movies</h3>
+<p>
+    You can modify or update the list of movies which user can guess within 
+    "resources\movies.txt". You can update the "movies.txt" file with new movies
+    name.
+</p>
+
+
 <h3>Running the game</h3>
 <p>To build and run the game, simply follow the below steps:</p>
 <ol>

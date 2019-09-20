@@ -37,7 +37,7 @@ public class Game {
     public void guess(char c) {
         boolean isGuessCorrect = false;
         for (int i = 0; i < movieName.length(); i++){
-            if (c == movieName.charAt(i)) {
+            if (Character.toLowerCase(c) == Character.toLowerCase(movieName.charAt(i))) {
                 isGuessCorrect = true;
                 movieNameDisplay.setCharAt(i, movieName.charAt(i));
             }
